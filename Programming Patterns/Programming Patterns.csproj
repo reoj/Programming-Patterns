@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Builder\" />
+    <Folder Include="Builder\Enums\" />
     <Folder Include="Factory\Contracts\" />
   </ItemGroup>
 

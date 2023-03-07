@@ -1,0 +1,72 @@
+﻿using Programming_Patterns.Builder.Contracts;
+using Programming_Patterns.Shared;
+using System.Text;
+
+namespace Programming_Patterns.Builder.Models
+{
+    public class Package
+    {
+        [Printable("Package ID")]
+        public Guid ID { get; set; }
+
+        [Printable("Container", defaultDesctipion: "No Container")]
+        public IMailContainer? Container { get; set; }
+
+        [Printable("Weigh")]
+        public float FinalWeigh { get; set; }
+
+        [Printable("Volume")]
+        public float FinalVolume { get; set; }
+
+        [Printable("Is Priority?")]
+        public bool IsPriority { get; set; }
+
+        [Printable("Is Certified?")]
+        public bool IsCertified { get; set; }
+
+        [Printable("Service Start Date")]
+        public DateTime ServiceStart { get; set; }
+
+        [Printable("Origin")]
+        public string Origin { get; set; }
+
+        [Printable("Destination")]
+        public string Destination { get; set; }
+
+        public Package(IMailContainer container)
+        {
+            ID = Guid.NewGuid();
+            Container = container;
+            ServiceStart = DateTime.Now;
+            CalculateWeigh();
+            CalculateVolume();
+        }
+
+        private void CalculateVolume()
+        {
+            this.FinalVolume = 0.1f;
+            if (this.Container is not null)
+            {
+                FinalVolume += Container.GetVolume();
+            }
+        }
+
+        private void CalculateWeigh()
+        {
+            this.FinalWeigh = 0.1f;
+            if (this.Container is not null)
+            {
+                FinalWeigh += Container.GetWeight();
+            }
+        }
+
+        public override string ToString()
+        {
+            string description = new DataClassPrinter<Package>(
+                instanceToPrint: this,
+                starterString: "General Package Information:"
+            ).ProduceToString();
+            return description.ToString();
+        }
+    }
+}
