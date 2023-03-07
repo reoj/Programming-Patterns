@@ -23,8 +23,7 @@ namespace Programming_Patterns.Factory.Models
 
         public override string ToString()
         {
-            StringBuilder descriptionBuilder = new StringBuilder();
-            string description = "";
+            StringBuilder description = new("");
             List<string> labels =
                 new()
                 {
@@ -53,17 +52,18 @@ namespace Programming_Patterns.Factory.Models
             string eachLabelWithEachAttribute(string aLabel, int index) =>
                 AddAttributeDescription(aLabel, atribs[index]);
 
-            void labeledAttributeAddItToDescription(string labeled) => description += labeled;
+            void labeledAttributeAddItToDescription(string labeled) =>
+                description.Append(labeled);
 
             labels
                 .Select(eachLabelWithEachAttribute)
                 .ToList()
                 .ForEach(labeledAttributeAddItToDescription);
 
-            return description;
+            return description.ToString();
         }
 
         private static string AddAttributeDescription(string label, string data) =>
-            $"{label}: {data}\n";
+            new StringBuilder().Append(label).Append(": ").AppendLine(data).ToString();
     }
 }
