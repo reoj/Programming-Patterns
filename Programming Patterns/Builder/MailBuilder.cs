@@ -6,7 +6,7 @@ namespace Programming_Patterns.Builder
     public abstract class MailBuilder
     {
         public abstract Package _package { get; init; }
-
+        
         MailBuilder WithOrigin(string origin)
         {
             _package.Origin = origin;
