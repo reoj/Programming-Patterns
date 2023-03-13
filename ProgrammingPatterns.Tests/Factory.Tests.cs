@@ -4,9 +4,9 @@ namespace ProgrammingPatterns.Tests
 {
     public class FactoryTests
     {
-        [Fact]
-        public void Test1()
-        {
-        }
+        
+        
     }
+
+    
 }
