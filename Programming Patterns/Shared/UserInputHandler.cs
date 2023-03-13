@@ -60,7 +60,8 @@ namespace Programming_Patterns.Builder
         private int GetOptionFromUser()
         {
             UserRawInput = Console.ReadLine() ?? String.Empty;
-            bool isInputInvalid = !int.TryParse(UserRawInput, out int option);
+            int option;
+            bool isInputInvalid = !int.TryParse(UserRawInput.Trim(), out option);
             if (isInputInvalid)
             {
                 throw new ArgumentException("Input is not a number");
@@ -73,6 +74,20 @@ namespace Programming_Patterns.Builder
             if (option <= 0 || option > RegisteredOptions.CountValidOptions)
             {
                 throw new ArgumentOutOfRangeException(nameof(option));
+            }
+            return option;
+        }
+
+        public static float GetFloatFromUser()
+        {
+            var userRawInput = Console.ReadLine();
+            string userInputAsString = userRawInput is not null
+                ? userRawInput.Trim()
+                : String.Empty;
+            bool isInputInvalid = !float.TryParse(userInputAsString, out float option);
+            if (isInputInvalid)
+            {
+                throw new ArgumentException("Input is not a number");
             }
             return option;
         }
