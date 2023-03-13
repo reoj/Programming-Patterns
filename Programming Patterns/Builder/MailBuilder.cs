@@ -1,45 +1,77 @@
-﻿using Programming_Patterns.Builder.Contracts;
+﻿using Programming_Patterns.Builder.Enums;
 using Programming_Patterns.Builder.Models;
 
 namespace Programming_Patterns.Builder
 {
-    internal class MailBuilder
+    public abstract class MailBuilder
     {
-        private readonly Package _package;
-        public MailBuilder WithPriority()
-        {
-            _package.IsPriority = true;
-            return this;
-        }
+        public abstract Package _package { get; init; }
 
-        public MailBuilder WithCertification()
-        {
-            _package.IsCertified = true;
-            return this;
-        }
-
-        public MailBuilder WithServiceStart(DateTime serviceStart)
-        {
-            _package.ServiceStart = serviceStart;
-            return this;
-        }
-
-        public MailBuilder WithOrigin(string origin)
+        MailBuilder WithOrigin(string origin)
         {
             _package.Origin = origin;
             return this;
         }
 
-        public MailBuilder WithDestination(string destination)
+        MailBuilder WithDestination(string destination)
         {
-            _package.Destination = destination;
+            _package.IsCertified = true;
             return this;
         }
 
-        public Package Build()
+        MailBuilder WithServiceStart(DateTime serviceStart)
+        {
+            _package.ServiceStart = serviceStart;
+            return this;
+        }
+
+        MailBuilder WithCertification()
+        {
+            _package.IsPriority = true;
+            return this;
+        }
+
+        MailBuilder WithPriority()
+        {
+            _package.IsPriority = true;
+            return this;
+        }
+
+        Package Build()
         {
             PackageInventory.Add(_package);
             return _package;
+        }
+
+        public static implicit operator Package(MailBuilder builder) => builder.Build();
+    }
+
+    public class BoxPackageBuilder : MailBuilder
+    {
+        public override Package _package
+        {
+            get => _package;
+            init => _package = value;
+        }
+
+        public BoxPackageBuilder(Contents contents)
+        {
+            var boxSize = BoxSizeCalculator.FindBoxSize(contents);
+            _package = new Package(new Box(boxSize));
+        }
+    }
+
+    public class EnvelopePackageBuilder : MailBuilder
+    {
+        public override Package _package
+        {
+            get => _package;
+            init => _package = value;
+        }
+
+        public EnvelopePackageBuilder(int sheets, PaperSize sheetSize)
+        {
+            _package = new Package(new Envelope(sheets, sheetSize));
         }
     }
 }
