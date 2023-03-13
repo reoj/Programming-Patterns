@@ -9,9 +9,10 @@ namespace Programming_Patterns.Shared
         public string? Unit { get; init; }
         public string DefaultDescription { get; } = "Not Specified";
 
-        public Printable(string label,string? unit=null, string? defaultDesctipion = null)
+        public Printable(string label, string? unit = null, string? defaultDesctipion = null)
         {
             Label = label;
+            Unit = unit;
             DefaultDescription = defaultDesctipion is not null
                 ? defaultDesctipion
                 : $"{label} not specified";
