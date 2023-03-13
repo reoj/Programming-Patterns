@@ -1,6 +1,6 @@
 namespace Programming_Patterns.Builder.Enums
 {
-    public enum EnvelopSize
+    public enum PaperSize
     {
         Letter,
         A4,
@@ -8,6 +8,5 @@ namespace Programming_Patterns.Builder.Enums
         A2,
         A1,
         A0
-        
     }
 }
