@@ -2,7 +2,7 @@
 {
     public interface IMailContainer
     {
-        public float GetVolume();
-        public float GetWeight();
+        public decimal GetVolume();
+        public decimal GetWeight();
     }
 }
