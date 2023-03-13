@@ -1,3 +1,16 @@
 ﻿using Programming_Patterns.Factory;
 
-FactoryController.Run();
+namespace DesignPatterns
+{
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            
+        }
+        private static void DoFactory()
+        {
+            FactoryController.Run();
+        }
+    }
+}
